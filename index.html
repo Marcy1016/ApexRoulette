@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Apex Roulette</title>
+    <link rel="canonical" href="https://getbootstrap.jp/docs/5.3/examples/cover/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700;900&display=swap" rel="stylesheet">    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+    <script src="js/particles.min.js"></script>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/animation.css">
+  </head>
+  <body class="d-flex h-100 text-center text-bg-dark">
+    <img id="lobby_bgimg" src="image/material/lobby.jpeg" alt="" style="width: 100%;">
+    <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
+
+      <header class="mb-auto">
+        <nav class="header_logo float-md-start mb-0 justify-content-center">
+          <span class="header_logo_span"><img src="image/material/apex-white-icon.svg" alt="apex-legends" class="" width="60"></span>
+        </nav>
+
+        <nav class="nav nav-masthead justify-content-center float-md-start">
+          <div class="dropdown nav-link fw-bold py-1 px-0">
+            <button id="navLegendsBtn" class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContentLegends" aria-controls="navbarToggleExternalContentLegends" aria-expanded="false" aria-label="Toggle navigation">
+              レジェンド
+            </button>
+            <button id="navWeaponsBtn" class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContentWeapons" aria-controls="navbarToggleExternalContentWeapons" aria-expanded="false" aria-label="Toggle navigation">
+              武器
+            </button>
+        </nav>
+      </header>
+
+      <!-- 武器排出率の調整用 -->
+      <input type="hidden" id="weaponAdjustmentNum" value="4" />
+      <input type="hidden" id="freeAdjustmentNum" value="1" />
+      <input type="hidden" id="incrementFreeAdjustmentNum" value="0.3" />
+
+      <div class="collapse_wrap w-100">
+        <div class="collapse" id="navbarToggleExternalContentLegends" data-bs-theme="dark">
+          <div class="p-4" id="accordionExampleLegend">
+            <div class="row justify-content-center">
+              <div class="legends-group" id="collapsefree">
+                <label class="legends-group-item">
+                  <input type="checkbox" class="form-check-input flex-shrink-0" id="freeSelectFlg" value="true">
+                  <span class="form-check-label" for="freeSelectFlg"><img class="legends-modal-image" legends-group-item src="image/legends/icon/free.png"><small>&nbsp;Free</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" value="Free" id="collapsefreeAll" value="0">
+                  <span class="form-check-label" for="collapsefreeAll">FREE</span>
+                </label>
+              </div>
+
+              <div class="legends-group" id="collapseassault">
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Bangalore" checked="" value=13>
+                  <span class="form-check-label" for="we_legend_Bangalore"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Bangalore.png"><small>&nbsp;バンガロール</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Fuse" checked="" value=14>
+                  <span class="form-check-label" for="we_legend_Fuse"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Fuse.png"><small>&nbsp;ヒューズ</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Ash" checked="" value=11>
+                  <span class="form-check-label" for="we_legend_Ash"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Ash.png"><small>&nbsp;アッシュ</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Mad-Maggie" checked="" value=15>
+                  <span class="form-check-label" for="we_legend_Mad-Maggie"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Mad-Maggie.png"><small>&nbsp;マッドマギー</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Ballistic" checked="" value=12>
+                  <span class="form-check-label" for="we_legend_Ballistic"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Ballistic.png"><small>&nbsp;バリスティック</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="collapseassaultAll" checked="" value="0">
+                  <span class="form-check-label" for="collapseassaultAll">アサルト</span>
+                </label>
+              </div>
+              <div class="legends-group" id="collapseskirmisher">
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Pathfinder" checked="" value=23>
+                  <span class="form-check-label" for="we_legend_Pathfinder"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Pathfinder.png"><small>&nbsp;パスファインダー</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Wraith" checked="" value=25>
+                  <span class="form-check-label" for="we_legend_Wraith"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Wraith.png"><small>&nbsp;レイス</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Octane" checked="" value=21>
+                  <span class="form-check-label" for="we_legend_Octane"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Octane.png"><small>&nbsp;オクタン</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Revenant" checked="" value=26>
+                  <span class="form-check-label" for="we_legend_Revenant"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Revenant.png"><small>&nbsp;レヴナント</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Horizon" checked="" value=24>
+                  <span class="form-check-label" for="we_legend_Horizon"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Horizon.png"><small>&nbsp;ホライゾン</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Valkyrie" checked="" value=27>
+                  <span class="form-check-label" for="we_legend_Valkyrie"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Valkyrie.png"><small>&nbsp;ヴァルキリー</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Alter" checked="" value=22>
+                  <span class="form-check-label" for="we_legend_Alter"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Alter.png"><small>&nbsp;オルター</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="collapseskirmisherAll" checked="" value="0">
+                  <span class="form-check-label" for="collapseskirmisherAll">スカーミッシャー</span>
+                </label>
+              </div>
+            </div>
+            <div class="row mb-4 justify-content-center">
+              <div class="legends-group" id="collapserecon">
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Bloodhound" checked="" value=33>
+                  <span class="form-check-label" for="we_legend_Bloodhound"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Bloodhound.png"><small>&nbsp;ブラッドハウンド</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Crypto" checked="" value=31>
+                  <span class="form-check-label" for="we_legend_Crypto"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Crypto.png"><small>&nbsp;クリプト</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Seer" checked="" value=32>
+                  <span class="form-check-label" for="we_legend_Seer"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Seer.png"><small>&nbsp;シア</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Vantage" checked="" value=34>
+                  <span class="form-check-label" for="we_legend_Vantage"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Vantage.png"><small>&nbsp;ヴァンテージ</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="collapsereconAll" checked="" value="0">
+                  <span class="form-check-label" for="collapsereconAll">リコン</span>
+                </label>
+              </div>
+              <div class="legends-group" id="collapsesupport">
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_pistol_p2020" checked="we_legend_Gibraltar" value=52>
+                  <span class="form-check-label" for="we_legend_Gibraltar"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Gibraltar.png"><small>&nbsp;ジブラルタル</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Lifeline" checked="" value=55>
+                  <span class="form-check-label" for="we_legend_Lifeline"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Lifeline.png"><small>&nbsp;ライフライン</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Mirage" checked="" value=54>
+                  <span class="form-check-label" for="we_legend_Mirage"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Mirage.png"><small>&nbsp;ミラージュ</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Loba" checked="" value=56>
+                  <span class="form-check-label" for="we_legend_Loba"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Loba.png"><small>&nbsp;ローバ</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_New-Castle" checked="we_legend_New-Castle" value=53>
+                  <span class="form-check-label" for="we_legend_New-Castle"><img class="legends-modal-image" legends-group-item src="image/legends/icon/New-Castle.png"><small>&nbsp;ニューキャッスル</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Conduit" checked="" value=51>
+                  <span class="form-check-label" for="we_legend_Conduit"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Conduit.png"><small>&nbsp;コンジット</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="collapsesupportAll" checked="" value="0">
+                  <span class="form-check-label" for="collapsesupportAll">サポート</span>
+                </label>
+              </div>
+              <div class="legends-group" id="collapsecontroller">
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Coustic" checked="" value=42>
+                  <span class="form-check-label" for="we_legend_Coustic"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Coustic.png"><small>&nbsp;コースティック</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Wattson" checked="" value=44>
+                  <span class="form-check-label" for="we_legend_Wattson"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Wattson.png"><small>&nbsp;ワットソン</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Rampart" checked="" value=43>
+                  <span class="form-check-label" for="we_legend_Rampart"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Rampart.png"><small>&nbsp;ランパート</small></span>
+                </label>
+                <label class="legends-group-item">
+                  <input class="form-check-input flex-shrink-0 we_legend" type="checkbox" id="we_legend_Catalyst" checked="" value=41>
+                  <span class="form-check-label" for="we_legend_Catalyst"><img class="legends-modal-image" legends-group-item src="image/legends/icon/Catalyst.png"><small>&nbsp;カタリスト</small></span>
+                </label>
+                <label class="legends-group-item-all">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="collapsecontrollerAll" checked="" value="0">
+                  <span class="form-check-label" for="collapsecontrollerAll">コントローラー</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse_wrap w-100">
+        <div class="collapse" id="navbarToggleExternalContentWeapons" data-bs-theme="dark">
+          <div class="p-4">
+              <div class="accordion accordion-flush" id="accordionExampleWeapons">
+                <div class="row mt-4">
+                  <div class="offset-md-2 col-2">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          アサルトライフル(AR)
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          サブマシンガン(SMG)
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          ライトマシンガン(LMG)
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                          スナイパーライフル(SR)
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                          ショットガン(SG)
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                          マークスマン
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                          ピストル
+                        </button>
+                      </h2>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <!-- アサルトライフル(AR) -->
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_ar_r301" checked="" value=11>
+                            <span class="form-check-label" for="we_ar_r301"><img class="weapon-modal-image" legends-group-item src="image/weapons/R-301_Carbine_Icon.svg"><small>&nbsp;R-301カービン</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_ar_furatora" checked="" value=12>
+                            <span class="form-check-label" for="we_ar_furatora"><img class="weapon-modal-image" legends-group-item src="image/weapons/VK-47_Flatline_Icon.svg"><small>&nbsp;VK-47フラットライン</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_ar_habokku" checked="" value=13>
+                            <span class="form-check-label" for="we_ar_habokku"><img class="weapon-modal-image" legends-group-item src="image/weapons/HAVOC_Rifle_Icon.svg"><small>&nbsp;ハボックライフル</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_ar_hemurokku" checked="" value=14>
+                            <span class="form-check-label" for="we_ar_hemurokku"><img class="weapon-modal-image" legends-group-item src="image/weapons/Hemlok_Burst_AR_Icon.svg"><small>&nbsp;ヘムロックバーストAR</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" class="we_weapon" id="we_ar_nemesisu" checked="" value=15>
+                            <span class="form-check-label" for="we_ar_nemesisu"><img class="weapon-modal-image" legends-group-item src="image/weapons/Nemesis_Burst_AR_Icon.svg"><small>&nbsp;ネメシス</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- サブマシンガン(SMG) -->
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_smg_puraura-" checked="" value=21>
+                            <span class="form-check-label" for="we_smg_puraura-"><img class="weapon-modal-image" legends-group-item src="image/weapons/Prowler_Burst_PDW_Icon.svg"><small>&nbsp;プラウラーバーストPDW</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_smg_boruto" checked="" value=22>
+                            <span class="form-check-label" for="we_smg_boruto"><img class="weapon-modal-image" legends-group-item src="image/weapons/Volt_SMG_Icon.svg"><small>&nbsp;ボルトSMG</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_smg_car" checked="" value=23>
+                            <span class="form-check-label" for="we_smg_car"><img class="weapon-modal-image" legends-group-item src="image/weapons/C.A.R._SMG_Icon.svg"><small>&nbsp;C.A.R. SMG</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_smg_r99" checked="" value=24>
+                            <span class="form-check-label" for="we_smg_r99"><img class="weapon-modal-image" legends-group-item src="image/weapons/R-99_SMG_Icon.svg"><small>&nbsp;R-99 SMG</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_smg_orutane-ta-" checked="" value=25>
+                            <span class="form-check-label" for="we_smg_orutane-ta-"><img class="weapon-modal-image" legends-group-item src="image/weapons/Alternator_SMG_Icon.svg"><small>&nbsp;オルタネーターSMG</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ライトマシンガン(LMG) -->
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_lmg_Lstar" checked="" value=31>
+                            <span class="form-check-label" for="we_lmg_Lstar"><img class="weapon-modal-image" legends-group-item src="image/weapons/L-STAR_EMG_Icon.svg"><small>&nbsp;L-スターEMG</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_lmg_supitto-faia-" checked="" value=32>
+                            <span class="form-check-label" for="we_lmg_supitto-faia-"><img class="weapon-modal-image" legends-group-item src="image/weapons/M600_Spitfire_Icon.svg"><small>&nbsp;M600スピットファイア</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_lmg_deliulo-syon" checked="" value=33>
+                            <span class="form-check-label" for="we_lmg_deliulo-syon"><img class="weapon-modal-image" legends-group-item src="image/weapons/Devotion_LMG_Icon.svg"><small>&nbsp;ディヴォーションLMG</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_lmg_ranpe-ji" checked="" value=34>
+                            <span class="form-check-label" for="we_lmg_ranpe-ji"><img class="weapon-modal-image" legends-group-item src="image/weapons/Rampage_LMG_Icon.svg"><small>&nbsp;ランページLMG</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- スナイパーライフル(SR) -->
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sr_charge" checked="" value=41>
+                            <span class="form-check-label" for="we_sr_charge"><img class="weapon-modal-image" legends-group-item src="image/weapons/Charge_Rifle_Icon.svg"><small>&nbsp;チャージライフル</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sr_rongubou" checked="" value=42>
+                            <span class="form-check-label" for="we_sr_rongubou"><img class="weapon-modal-image" legends-group-item src="image/weapons/Longbow_DMR_Icon.svg"><small>&nbsp;ロングボウDMR</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sr_kure-ba-" checked="" value=43>
+                            <span class="form-check-label" for="we_sr_kure-ba-"><img class="weapon-modal-image" legends-group-item src="image/weapons/Kraber_.50-Cal_Sniper_Icon.svg"><small>&nbsp;クレーバー.50スナイパー</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sr_sentineru" checked="" value=44>
+                            <span class="form-check-label" for="we_sr_sentineru"><img class="weapon-modal-image" legends-group-item src="image/weapons/Sentinel_Icon.svg"><small>&nbsp;センチネル</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ショットガン(SG) -->
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sg_pi-suki-pa-" checked="" value=51>
+                            <span class="form-check-label" for="we_sg_pi-suki-pa-"><img class="weapon-modal-image" legends-group-item src="image/weapons/Peacekeeper_Icon.svg"><small>&nbsp;ピースキーパー</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sg_masutelifu" checked="" value=52>
+                            <span class="form-check-label" for="we_sg_masutelifu"><img class="weapon-modal-image" legends-group-item src="image/weapons/Mastiff_Shotgun_Icon.svg"><small>&nbsp;マスティフショットガン</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sg_eva-8" checked="" value=53>
+                            <span class="form-check-label" for="we_sg_eva-8"><img class="weapon-modal-image" legends-group-item src="image/weapons/EVA-8_Auto_Icon.svg"><small>&nbsp;EVA-8オート</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_sg_mozan" checked="" value=54>
+                            <span class="form-check-label" for="we_sg_mozan"><img class="weapon-modal-image" legends-group-item src="image/weapons/Mozambique_Shotgun_Icon.svg"><small>&nbsp;モザンビークショットガン</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- マークスマン -->
+                    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_marksman_triple-take" checked="" value=61>
+                            <span class="form-check-label" for="we_marksman_triple-take"><img class="weapon-modal-image" legends-group-item src="image/weapons/Triple_Take_Icon.svg"><small>&nbsp;トリプルテイク</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_marksman_g7" checked="" value=62>
+                            <span class="form-check-label" for="we_marksman_g7"><img class="weapon-modal-image" legends-group-item src="image/weapons/G7_Scout_Icon.svg"><small>&nbsp;G7スカウト</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_marksman_3030repeater" checked="" value=63>
+                            <span class="form-check-label" for="we_marksman_3030repeater"><img class="weapon-modal-image" legends-group-item src="image/weapons/30-30_Repeater_Icon.svg"><small>&nbsp;30-30リピーター</small></span>
+                          </label>
+                          <label class="weapons-group-item col-5 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_marksman_bosekku" checked="" value=64>
+                            <span class="form-check-label" for="we_marksman_bosekku"><img class="weapon-modal-image" legends-group-item src="image/weapons/Bocek_Compound_Bow_Icon.svg"><small>&nbsp;ボセックコンパウンドボウ</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ピストル -->
+                    <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExampleWeapons">
+                      <div class="accordion-body" style="margin: -0.75rem !important;">
+                        <div class="weapons-group row justify-content-center">
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_pistol_p2020" checked="" value=71>
+                            <span class="form-check-label" for="we_pistol_p2020"><img class="weapon-modal-image" legends-group-item src="image/weapons/P2020_Icon.svg"><small>&nbsp;P2020</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_pistol_ulinguman" checked="" value=72>
+                            <span class="form-check-label" for="we_pistol_ulinguman"><img class="weapon-modal-image" legends-group-item src="image/weapons/Wingman_Icon.svg"><small>&nbsp;ウィングマン</small></span>
+                          </label>
+                          <label class="weapons-group-item col-3 p-4 mb-2">
+                            <input class="form-check-input flex-shrink-0 we_weapon" type="checkbox" id="we_pistol_re45" checked="" value=73>
+                            <span class="form-check-label" for="we_pistol_re45"><img class="weapon-modal-image" legends-group-item src="image/weapons/RE-45_Auto_Icon.svg"><small>&nbsp;RE-45オート</small></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <main id="lobby" class="px-3">
+        <div id="result" class="row justify-content-center" style="position: absolute; top: 100px;">
+          <div class="player_card col m-2 player1">
+            <div class="card-body">
+              <span class="card-img-wrapper"><img class="card-img legend_img default" src="image/material/question.png"></span>
+              <span data-role="role">
+                <canvas id="player1_scale_mini"   class="player1 scale_mini"></canvas>
+                <canvas id="player1_scale_normal" class="player1"></canvas>
+              </span>
+              <input type="text" class="form-control mb-2" placeholder="Marcy" value="Marcy" required="">
+              <h5 class="card-title legend_name mt-2">Chose Legend</h5>
+              <div class="weapons_list row mt-2">
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2" style="display:none;"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="player_card col m-2 player2">
+            <div class="card-body">
+              <span class="card-img-wrapper"><img class="card-img legend_img default" src="image/material/question.png"></span>
+              <span data-role="role">
+                <canvas id="player2_scale_mini"   class="player2 scale_mini"></canvas>
+                <canvas id="player2_scale_normal" class="player2"></canvas>
+              </span>
+              <input type="text" class="form-control mb-2" placeholder="Mayo" value="Mayo" required="">
+              <h5 class="card-title legend_name mt-2">Chose Legend</h5>
+              <div class="weapons_list row mt-2">
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2" style="display:none;"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="player_card col m-2 player3">
+            <div class="card-body">
+              <span class="card-img-wrapper"><img class="card-img legend_img default" src="image/material/question.png"></span>
+              <span data-role="role">
+                <canvas id="player3_scale_mini"   class="player3 scale_mini"></canvas>
+                <canvas id="player3_scale_normal" class="player3"></canvas>
+              </span>
+              <input type="text" class="form-control mb-2" placeholder="Keitenny" value="Keitenny" required="">
+              <h5 class="card-title legend_name mt-2">Chose Legend</h5>
+              <div class="weapons_list row mt-2">
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2" style="display:none;"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="player_card col m-2 player4">
+            <div class="card-body">
+              <span class="card-img-wrapper"><img class="card-img legend_img default" src="image/material/question.png"></span>
+              <span data-role="role">
+                <canvas id="player4_scale_mini"   class="player4 scale_mini"></canvas>
+                <canvas id="player4_scale_normal" class="player4"></canvas>
+              </span>
+              <input type="text" class="form-control mb-2" placeholder="TAKABON" value="TAKABON" required="">
+              <h5 class="card-title legend_name mt-2">Chose Legend</h5>
+              <div class="weapons_list row mt-2">
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small></span>
+                <span class="col-12 mt-2" style="display:none;"><img class="weapon-modal-image" legends-group-item src="image/material/question.png"><small>&nbsp;Chose Weapons</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <section id="setting">
+        <div class="mt-5 justify-content-center">
+          <div class="row m-2 form-item">
+            <p class="col-8 form-label m-0">レジェンド画像モード</p>
+            <div class="col-4">
+              <div class="row">
+                <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_1" value="mode1" autocomplete="off" checked>
+                <label class="col input-radio-label" for="legend_img_mode_1">モード1</label>
+                <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_2" value="mode2" autocomplete="off">
+                <label class="col input-radio-label" for="legend_img_mode_2">モード2</label>
+              </div>
+            </div>
+          </div>
+          <div class="row m-2 form-item">
+            <p class="col-8 form-label m-0">Free Weapon 排出率上昇機能</p>
+            <div class="col-4">
+              <div class="row">
+                <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_ON" value="ON" autocomplete="off" checked>
+                <label class="col input-radio-label" for="free_weapon_Flg_ON">ON</label>
+                <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_OFF" value="OFF" autocomplete="off">
+                <label class="col input-radio-label" for="free_weapon_Flg_OFF">OFF</label>
+              </div>
+            </div>
+          </div>
+          <div class="row m-2 form-item">
+            <p class="col-8 form-label m-0">武器1 種類選択</p>
+            <div class="col-4">
+              <div class="row">
+                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_weapon" value="NORMAL" autocomplete="off" checked>
+                <label class="col input-radio-label" for="weapon1_kinds_weapon">武器</label>
+                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_ammo" value="AMMO" autocomplete="off">
+                <label class="col input-radio-label" for="weapon1_kinds_ammo">弾種</label>
+                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_free" value="FREE" autocomplete="off">
+                <label class="col input-radio-label" for="weapon1_kinds_free">FREE</label>
+              </div>
+            </div>
+          </div>
+          <div class="row m-2 form-item">
+            <p class="col-8 form-label m-0">武器2 種類選択</p>
+            <div class="col-4">
+              <div class="row">
+                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_weapon" value="NORMAL" autocomplete="off" checked>
+                <label class="col input-radio-label" for="weapon2_kinds_weapon">武器</label>
+                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_ammo" value="AMMO" autocomplete="off">
+                <label class="col input-radio-label" for="weapon2_kinds_ammo">弾種</label>
+                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_free" value="FREE" autocomplete="off">
+                <label class="col input-radio-label" for="weapon2_kinds_free">FREE</label>
+              </div>
+            </div>
+          </div>
+        </div><!-- mt-5 justify-content-center -->
+
+        <label for="setting_button" id="setting_close_wrapper" class="align-self-start">
+          <button type="button" name="button" id="setting_close" onclick="hideSetting()"><span>ESC</span>戻る</button>
+        </label>
+      </section>
+
+      <footer class="mt-auto text-white-50">
+        <div class="row justify-content-between">
+          <label id="iikanjiFlg_wrapper" class="col-2 mb-2 align-self-start" for="iikanjiFlg">
+            <input class="" type="checkbox" id="iikanjiFlg" checked="">
+            <span class="form-check-label" for="iikanjiFlg">武器の排出率調整</span>
+          </label>
+          <div class="w-100"></div>
+          <label id="start_button_wrapper" class="col-2 align-self-start" for="start_button">
+            <input type="button" id="start_button" value="Start" class="btn btn-primary" onclick="onClickStart(false)">
+            <span class="" for="start_button"></span>
+          </label>
+          <label for="setting_button" id="setting_button_wrarpper" class="align-self-end">
+            <button type="button" name="button" id="setting_button" onclick="showSetting()"><img src="image/material/gear.png" width="40px"> </button>
+          </label>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+
+      function showSetting(){
+        $("#setting").show(); // $("#lobby").hide();
+      }
+
+      function hideSetting(){
+        $("#setting").hide(); // $("#lobby").show();
+      }
+
+      $(function(){
+        // 全選択・全解除
+        $(".legends-group-item-all input[type=checkbox]").change(function(){
+          let selecter = "#" + $(this).parents(".legends-group").attr("id");
+          if($(this).is(":checked") == true){
+            $(selecter).find("input").each(function(){
+              $(this).prop('checked', 'checked');
+            });
+          } else {
+            $(selecter).find("input").each(function(){
+              $(this).prop('checked', false);
+            });
+          }
+        });
+
+        // ひとつでもcheckedがあればlegends-group-item-allもchecked
+        $(".legends-group-item input[type=checkbox]").change(function(){
+          let selecter = "#" + $(this).parents(".legends-group").attr("id");
+          $(selecter).find("input").length;
+          var status = "";
+          var count  = 0;
+          $(selecter).find(".legends-group-item input").each(function(){
+            if($(this).is(":checked") === true){count++;}
+          });
+          if(count === 0){status = false;} else {status = "checked";}
+          $(selecter).find(".legends-group-item-all input").prop('checked', status);
+        });
+      });
+
+    </script>
+
+  </body>
+</html>

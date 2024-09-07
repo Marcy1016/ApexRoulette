@@ -1,0 +1,262 @@
+#lobby{
+  position: relative;
+  width:60%;
+  height: 80vw;
+  margin: auto;
+}
+
+.player_card{
+  position: relative;
+}
+
+.player_card.player3{animation-delay: .2s;}
+.player_card.player2{animation-delay: .4s;}
+.player_card.player4{animation-delay: .6s;}
+
+.player_card .legend_img{
+  width: auto;
+  height: 290px;
+  object-position: 50% 0;
+  object-fit: cover;
+  mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 80%, transparent);
+}
+
+/* 画像モード2のとき */
+.player_card span.card-img-wrapper:has(.legend_img[src^="image/legends/mode2/"]){
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 290px;
+  z-index: -2;
+}
+
+.player_card .legend_img[src^="image/legends/mode2/"]{
+  width: 100%;
+  height: 575px;
+  object-position: 0 0;
+  opacity: 0.8;
+}
+
+.player_card:has(.legend_img[src^="image/legends/mode2/"]) span[data-role="role"]{
+  z-index: -5;
+}
+/* end 画像モード2のとき */
+
+
+span[data-role="role"]{
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(255, 255, 255, 0) 100%);
+  bottom: 0;
+  left: 10%;
+  margin: auto;
+  z-index: -1;
+  border-radius: 0 0 320px 320px;
+}
+
+.card-body.assault span[data-role="role"]{
+/* #EB3333 rgb(235,51,51) */
+  background: radial-gradient(ellipse at center,
+    rgba(235,51,51, 0.6) 0%,
+    rgba(235,51,51, 0) 75%,
+    rgba(235,51,51, 0) 100%);
+}
+
+.card-body.skirmisher span[data-role="role"]{
+  /* #C2A817 rgb(194,168,23) */
+  background: radial-gradient(ellipse at center,
+    rgba(194,168,23, 0.3) 0%,
+    rgba(194,168,23, 0) 75%,
+    rgba(194,168,23, 0) 100%);
+}
+
+.card-body.recon span[data-role="role"]{
+  /* #9C21E8 rgb(156,33,232) */
+  background: radial-gradient(ellipse at center,
+    rgba(156,33,232, 0.3) 0%,
+    rgba(156,33,232, 0) 75%,
+    rgba(156,33,232, 0) 100%);
+}
+
+.card-body.support span[data-role="role"]{
+  /* #2973E0 rgb(41,115,224) */
+  background: radial-gradient(ellipse at center,
+    rgba(41,115,224, 0.3) 0%,
+    rgba(41,115,224, 0) 75%,
+    rgba(41,115,224, 0) 100%);
+}
+
+.card-body.controller span[data-role="role"]{
+  /* #40CC33 rgb(64,204,51) */
+  background: radial-gradient(ellipse at center,
+    rgba(64,204,51, 0.3) 0%,
+    rgba(64,204,51, 0) 75%,
+    rgba(64,204,51, 0) 100%);
+}
+
+.card-body.Mythic span[data-role="role"]{
+  /* #000 rgb(0,0,0) */
+  background: radial-gradient(ellipse at center,
+    rgba(0,0,0, 0.3) 0%,
+    rgba(0,0,0, 0) 75%,
+    rgba(0,0,0, 0) 100%);
+}
+
+span[data-role="role"] canvas{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: scale(0.8);
+}
+span[data-role="role"] canvas.scale_mini{transform: scale(0.5);}
+
+.weapon-modal-image{
+  width: 100px;
+  height: auto;
+}
+
+.player_card input[type="text"]{
+  border-radius: 0;
+  opacity: 0.8;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.1em 0;
+}
+
+.player_card .card-title{
+  background: rgba(255,255,255,0.5);
+  border: solid #fff 2px;
+  box-shadow: 0 0 10px 2px #fff;
+  font-size: 1em;
+  padding: 0.3em 0;
+}
+
+.card-body.assault .card-title{
+/* #EB3333 rgb(235,51,51) */
+  background: rgba(235,51,51,0.5);
+  border: solid #EB3333 2px;
+  box-shadow: 0 0 10px 2px #EB3333;
+}
+
+.card-body.skirmisher .card-title{
+  /* #C2A817 rgb(194,168,23) */
+  background: rgba(194,168,23,0.5);
+  border: solid #C2A817 2px;
+  box-shadow: 0 0 10px 2px #C2A817;
+}
+
+.card-body.recon .card-title{
+  /* #9C21E8 rgb(156,33,232) */
+  background: rgba(156,33,232,0.5);
+  border: solid #9C21E8 2px;
+  box-shadow: 0 0 10px 2px #9C21E8;
+}
+
+.card-body.support .card-title{
+  /* #2973E0 rgb(41,115,224) */
+  background: rgba(41,115,224,0.5);
+  border: solid #2973E0 2px;
+  box-shadow: 0 0 10px 2px #2973E0;
+}
+
+.card-body.controller .card-title{
+  /* #40CC33 rgb(64,204,51) */
+  background: rgba(64,204,51,0.5);
+  border: solid #40CC33 2px;
+  box-shadow: 0 0 10px 2px #40CC33;
+}
+
+.card-body.Mythic .card-title{
+  /* #000 rgb(0,0,0) */
+  background: rgba(0,0,0,0.5);
+  border: solid #000 2px;
+  box-shadow: 0 0 10px 2px #000;
+}
+
+.player_card .weapons_list{
+  padding: 0 12px;
+}
+
+.player_card .weapons_list .col-12{
+  background: rgba(0,0,0,0.5);
+  border: solid #999 2px;
+  padding: 10px 0;
+}
+
+.player_card .weapon-modal-image{
+  width: 40%;
+  height: 50px;
+  margin: 0 30%;
+  object-fit: contain;
+  filter: invert(100%);
+}
+
+
+
+/* 設定画面 */
+#setting{
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 50px);
+  backdrop-filter: blur(25px);
+  top: 50px;
+  padding: 20px 20%;
+  z-index: 2;
+  display: none;
+}
+
+.form-item{
+  text-align: left;
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.form-label{
+  padding: 0.8em 1em;
+}
+
+.input-radio-label{
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0.4em 0.3em;
+  text-align: center;
+  padding: 0.4em 1em;
+}
+
+input:checked + .input-radio-label{
+  border-bottom: solid 2px #ee452c;
+}
+
+
+#setting_close_wrapper{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+#setting_close{
+  background: none;
+  border: none;
+  color: #fff;
+  font-style: normal;
+}
+
+#setting_close span{
+  background: rgba(255,255,255,0.6);
+  color: rgba(0,0,0,0.8);
+  font-weight: 500;
+  padding: 2px 4px;
+  margin-right: 0.4em;
+}
+
+#setting_close_wrapper:hover #setting_close{
+  color: #ee452c;
+}
+
+#setting_close_wrapper:hover #setting_close > span{
+  background: #ee452c;
+  color: #fff;
+}

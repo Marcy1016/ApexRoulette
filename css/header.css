@@ -1,0 +1,242 @@
+body{
+  overflow: hidden;
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+#lobby_bgimg{
+  max-width: 100%;
+  position: absolute;
+  z-index: -10;
+}
+
+header{
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 50px;
+}
+
+header .header_logo{
+  position: fixed;
+  width: 150px;
+  height: 50px;
+  z-index: 5;
+}
+
+header .header_logo_span{
+  position: absolute;
+  left: 23px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(45deg);
+  background: linear-gradient(rgb(110,35,35), rgb(167,5,7));
+}
+
+header .header_logo_span img{
+  position: relative;
+  top: 15px;
+  left: -2px;
+  transform: rotate(-45deg);
+}
+
+header .nav{
+  position: relative;
+  left: 125px;
+}
+
+.dropdown .btn{
+  position: relative;
+  height: 45px;
+  width: 160px;
+  border: none;
+  border-radius: 0;
+  background-color: inherit;
+  color: white;
+}
+
+.dropdown .btn::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: skewX(45deg);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: solid 5px rgba(255, 255, 255, 0.5);
+  z-index: -1;
+}
+.dropdown .btn:active,
+.dropdown .btn:hover{
+  background-color: inherit;
+  color: white;
+}
+
+.dropdown .btn:hover::before{ /* #6e2323 rgb(110,35,35)  #a70507 rgb(167,5,7)  #ee452c rgb(238,69,44)*/
+  background: linear-gradient(rgb(110,35,35), rgb(167,5,7));
+  border-bottom: solid 5px #ee452c;
+}
+
+.collapse_wrap{
+  position: absolute;
+  top: 50px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1;
+}
+
+.accordion,
+.accordion-item{
+  background: none;
+  border: none;
+}
+
+.weapons-group input{
+  display: none;
+}
+
+.accordion-button,
+.weapons-group .weapons-group-item{
+  position: relative;
+  background: rgba(0,0,0,0.2);
+  background-image: repeating-linear-gradient(#333, #333 1px, transparent 1px, transparent 3px);
+  border: 1px solid #555;
+  font-weight: bold;
+  margin: 0 .25rem;
+  user-select: none;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed),
+.weapons-group .weapons-group-item:has(:checked){
+  background: linear-gradient(rgba(110,35,35,0.2), rgba(167,5,7,0.2));
+  border: solid 1px #ee452c;
+  color: #ee452c;
+  box-shadow: none;
+}
+
+[data-bs-theme=dark] .accordion-button::after{
+  filter: invert(31%) sepia(3%) saturate(65%) hue-rotate(69deg) brightness(103%) contrast(93%);
+}
+
+[data-bs-theme=dark] .accordion-button:not(.collapsed)::after{
+  filter: invert(49%) sepia(93%) saturate(3002%) hue-rotate(335deg) brightness(87%) contrast(116%);
+}
+
+.weapons-group .weapons-group-item .weapon-modal-image{
+  width: 80%;
+  height: 50px;
+  object-fit: contain;
+  margin: 0 10%;
+  filter: invert(31%) sepia(3%) saturate(65%) hue-rotate(69deg) brightness(103%) contrast(93%);
+}
+
+.weapons-group .weapons-group-item:has(:checked) .weapon-modal-image{
+  filter: invert(100%);
+}
+
+#accordionExampleLegend .row{
+  width: 70%;
+  margin: auto;
+}
+
+.legends-group{
+  position: relative;
+  width: auto;
+  height: 60px;
+  background: linear-gradient(0deg, rgba(85,85,85,1), rgba(85,85,85,0) 50%, rgba(85,85,85,0));
+  margin: 2rem 1rem;
+  padding: 0;
+}
+
+:root{
+  --free       : #000;
+  --assault    : #EB3333;
+  --skirmisher : #C2A817;
+  --recon      : #9C21E8;
+  --support    : #2973E0;
+  --controller : #40CC33;
+
+  --free-rgb      : rgba(0,0,0,1);
+  --assault-rgb   : rgba(235,51,51,1);
+  --skirmisher-rgb: rgba(194,168,23,1);
+  --recon-rgb     : rgba(156,33,232,1);
+  --support-rgb   : rgba(41,115,224,1);
+  --controller-rgb: rgba(64,204,51,1);
+}
+
+.legends-group .legends-group-item input,
+.legends-group .legends-group-item small{
+  display: none;
+}
+
+.legends-group .legends-group-item{
+  position: relative;
+}
+
+.legends-group .legends-group-item::after{
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 57px;
+  top: 0;
+  left: 0;
+  background-image:repeating-linear-gradient(#555, #555 1px, transparent 1px, transparent 3px);
+  z-index: 1;
+}
+
+.legends-group .legends-group-item .legends-modal-image{
+  width: 50px;
+  height: auto;
+  filter: grayscale(1);
+}
+
+.legends-group .legends-group-item:has(:checked)::after{
+  background-image: none;
+}
+
+.legends-group .legends-group-item:has(:checked) .legends-modal-image{
+  filter: none;
+}
+
+.legends-group-item-all input{
+  display: none;
+}
+.legends-group-item-all .form-check-label{
+  position: absolute;
+  background: #2f2f2f;
+  display: block;
+  width: 100%;
+  height: 2.5em;
+  bottom: -2.5em;
+  left: 0;
+  padding: 5px 0;
+  font-size: 0.8em;
+  border: none;
+  cursor: pointer;
+}
+
+
+.legends-group#collapsefree:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(0,0,0,1),rgba(0,0,0,0) 50%, rgba(0,0,0,0));
+}
+
+.legends-group#collapseassault:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(235,51,51,1),rgba(235,51,51,0) 50%, rgba(0,0,0,0));
+}
+
+.legends-group#collapseskirmisher:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(194,168,23,1),rgba(194,168,23,0) 50%, rgba(0,0,0,0));
+}
+
+.legends-group#collapserecon:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(156,33,232,1),rgba(156,33,232,0) 50%, rgba(0,0,0,0));
+}
+
+.legends-group#collapsesupport:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(41,115,224,1),rgba(41,115,224,0) 50%, rgba(0,0,0,0));
+}
+
+.legends-group#collapsecontroller:has(.legends-group-item-all input:checked){
+  background: linear-gradient(0deg, rgba(64,204,51,1),rgba(64,204,51,0) 50%, rgba(0,0,0,0));
+}
