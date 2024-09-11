@@ -3,6 +3,9 @@ body{
   font-family: "Zen Kaku Gothic Antique", sans-serif;
   font-weight: 300;
   font-style: normal;
+  background-image: url("../image/material/lobby.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 #lobby_bgimg{
@@ -81,7 +84,6 @@ header .nav{
   position: absolute;
   top: 50px;
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   z-index: 1;
 }
 

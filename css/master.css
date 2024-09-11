@@ -1,8 +1,5 @@
 #lobby{
   position: relative;
-  width:60%;
-  height: 80vw;
-  margin: auto;
 }
 
 .player_card{
@@ -20,6 +17,12 @@
   object-fit: cover;
   mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 80%, transparent);
 }
+
+.player_card .legend_img[src="image/legends/mode1/Mythic.png"]{
+  width: 100%;
+  object-fit: scale-down;
+}
+
 
 /* 画像モード2のとき */
 .player_card span.card-img-wrapper:has(.legend_img[src^="image/legends/mode2/"]){
@@ -196,6 +199,19 @@ span[data-role="role"] canvas.scale_mini{transform: scale(0.5);}
   filter: invert(100%);
 }
 
+.player_card .weapon-modal-image[src="image/weapons/nessie.png"]{
+  filter: grayscale(1);
+}
+
+.player_card .weapon-modal-image[src^="image/ammo"]{
+  filter: none;
+}
+
+#result{
+  position: relative;
+  width: 100%;
+  top: 50px;
+}
 
 
 /* 設定画面 */
@@ -205,7 +221,6 @@ span[data-role="role"] canvas.scale_mini{transform: scale(0.5);}
   height: calc(100% - 50px);
   backdrop-filter: blur(25px);
   top: 50px;
-  padding: 20px 20%;
   z-index: 2;
   display: none;
 }
@@ -230,6 +245,39 @@ input:checked + .input-radio-label{
   border-bottom: solid 2px #ee452c;
 }
 
+input[type="range"]{
+  appearance:none;
+  background: none;
+  height: 2.3em;
+  padding: 0;
+  margin: 0.4em 0.3em;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+  appearance:none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 2.3em;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  appearance:none;
+  border-radius:none;
+  width: 2px;
+  height: 2.3em;
+  background-color: #ee452c;
+  border: #ee452c;
+  transform:scale(1.1);
+}
+
+#setting input[type="text"]{
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  box-sizing: border-box;
+  height: 2.3em;
+  margin: 0.4em 0.3em;
+  color: #fff;
+  text-align: center;
+}
 
 #setting_close_wrapper{
   position: absolute;
@@ -259,4 +307,18 @@ input:checked + .input-radio-label{
 #setting_close_wrapper:hover #setting_close > span{
   background: #ee452c;
   color: #fff;
+}
+
+
+@media (min-width: 992px){
+  .footer_left_contents{
+    max-width: 15%;
+  }
+}
+
+
+@media (min-width: 768px){
+  header .nav{
+    left: -95px;
+  }
 }

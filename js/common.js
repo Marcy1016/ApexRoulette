@@ -1,4 +1,4 @@
-const LEGEND_LIST = [
+const legendList = [
     {id:11, role:"assault", name:"アッシュ", weaponCnt:2, img:"assault/Ash.png"},
     {id:12, role:"assault", name:"バリスティック", weaponCnt:3, img:"assault/Ballistic.png"},
     {id:13, role:"assault", name:"バンガロール", weaponCnt:2, img:"assault/Bangalore.png"},
@@ -36,7 +36,7 @@ const LEGEND_LIST = [
 const FREE_WEAPON_OBJ1 = {id:998, type:"Free", name:"All Weapons", ammo:"Free", img:"image/weapons/nessie.png", type:"other"};
 const FREE_WEAPON_OBJ2 = {id:999, type:"Free", name:"All Weapons", ammo:"Free", img:"image/weapons/nessie.png", type:"other"};
 
-const WEAPON_LIST = [
+const weaponList = [
     {id:11, type:"AR", name:"R-301カービン", ammo:"Light", img:"image/weapons/R-301_Carbine_Icon.svg", type:"main"},
     {id:12, type:"AR", name:"VK-47フラットライン", ammo:"Heavy", img:"image/weapons/VK-47_Flatline_Icon.svg", type:"main"},
     {id:13, type:"AR", name:"ハボックライフル", ammo:"Energy", img:"image/weapons/HAVOC_Rifle_Icon.svg", type:"main"},
@@ -77,19 +77,17 @@ const WEAPON_LIST = [
     FREE_WEAPON_OBJ2
 ];
 
-const DEFAULT_PARTICLE = {role:"default" , color1:"#FFF", color2:"rgb(255,255,255,0.2)"};
-
-const PARTICLE_SETTING_LIST = [
+const particleSettingList = [
     {role:"assault" , color1:"#EB3333", color2:"rgb(235,51,51,0.2)"},
     {role:"skirmisher" , color1:"#C2A817", color2:"rgb(194,168,23,0.2)"},
     {role:"recon" , color1:"#9C21E8", color2:"rgb(156,33,232,0.2)"},
     {role:"support" , color1:"#2973E0", color2:"rgb(41,115,224,0.2)"},
     {role:"controller" , color1:"#40CC33", color2:"rgb(64,204,51,0.2)"},
     {role:"Mythic" , color1:"#000", color2:"rgb(0,0,0,0.2)"},
-    DEFAULT_PARTICLE    
+    {role:"default" , color1:"#FFF", color2:"rgb(255,255,255,0.2)"}
 ];
 
-const AMMO_TYPE_LIST = [
+const ammoTypeList = [
     {id:10, type:"Light", name:"Light", ammo:"Light", img:"image/ammo/light.svg", type:"other"},
     {id:20, type:"Heavy", name:"Heavy", ammo:"Heavy", img:"image/ammo/heavy.svg", type:"other"},
     {id:30, type:"Energy", name:"Energy", ammo:"Energy", img:"image/ammo/energy.svg", type:"other"},
@@ -111,10 +109,15 @@ let legendImgModeBase = "image/legends/";
  * ロード処理
  */
 $(function(){
+    console.log("load");
+
     // selctedParticleListの設定
-    // 初期用の設定値「default」を準備
+    let defaultParticle = particleSettingList.find(p => {
+        // 初期用の設定値「default」を準備
+        return p.role == "default";
+    });
     for(let i=0; i<4; i++){
-        selctedParticleList.push(DEFAULT_PARTICLE);
+        selctedParticleList.push(defaultParticle)
     }
     setParicles();
 
@@ -236,7 +239,7 @@ function setPlayerProperties(playerNo, iikanjiFlg){
     });
 
     selctedParticleList.push(
-        PARTICLE_SETTING_LIST.find(p => {
+        particleSettingList.find(p => {
             return p.role == legend.role;
         })
     );
@@ -246,7 +249,7 @@ function setPlayerProperties(playerNo, iikanjiFlg){
 }
 
 /**
- * 抽出対象の武器リスト生成
+ * 
  * @param {*} iikanjiFlg 
  */
 function setWeaponIdList(iikanjiFlg){
@@ -276,7 +279,7 @@ function setWeaponIdList(iikanjiFlg){
             //値を取得
             let weaponId = this.value;
             filterWeaponIdList1.push(weaponId);
-            let weapon = WEAPON_LIST.find(w => {
+            let weapon = weaponList.find(w => {
                 return w.id == weaponId;
             });
             if(weapon.type === "main"){
@@ -292,7 +295,7 @@ function setWeaponIdList(iikanjiFlg){
             //値を取得
             let weaponId = this.value;
             filterWeaponIdList2.push(weaponId);
-            let weapon = WEAPON_LIST.find(w => {
+            let weapon = weaponList.find(w => {
                 return w.id == weaponId;
             });
             if(weapon.type === "sub"){
@@ -342,7 +345,7 @@ function getLegend(){
     while (true) {
         let index = getRandomInt(filterLegendIdList.length);
         let legendId = filterLegendIdList[index];
-        legend = LEGEND_LIST.find(l => {
+        legend = legendList.find(l => {
             return l.id == legendId;
         });
         if(!selectedLegendList.includes(legend)){
@@ -402,7 +405,7 @@ function getWeaponRand(selectedWeapon, kindsId, filterList){
             while (true) {
                 let index = getRandomInt(filterList.length);
                 let weaponId = filterList[index];
-                weapon = WEAPON_LIST.find(w => {
+                weapon = weaponList.find(w => {
                     return w.id == weaponId;
                 });
                 if(!selectedWeapon.includes(weapon)){
@@ -413,8 +416,8 @@ function getWeaponRand(selectedWeapon, kindsId, filterList){
             break;
     
         case "AMMO":
-            let index = getRandomInt(AMMO_TYPE_LIST.length);
-            let ammo = AMMO_TYPE_LIST[index];
+            let index = getRandomInt(ammoTypeList.length);
+            let ammo = ammoTypeList[index];
             selectedWeapon.push(ammo);
             break;
 

@@ -19,10 +19,8 @@
     <link rel="stylesheet" href="css/animation.css">
   </head>
   <body class="d-flex h-100 text-center text-bg-dark">
-    <img id="lobby_bgimg" src="image/material/lobby.jpeg" alt="" style="width: 100%;">
     <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
-
-      <header class="mb-auto">
+      <header>
         <nav class="header_logo float-md-start mb-0 justify-content-center">
           <span class="header_logo_span"><img src="image/material/apex-white-icon.svg" alt="apex-legends" class="" width="60"></span>
         </nav>
@@ -428,8 +426,8 @@
         </div>
       </div>
 
-      <main id="lobby" class="px-3">
-        <div id="result" class="row justify-content-center" style="position: absolute; top: 100px;">
+      <main id="lobby" class="container">
+        <div id="result" class="row justify-content-center">
           <div class="player_card col m-2 player1">
             <div class="card-body">
               <span class="card-img-wrapper"><img class="card-img legend_img default" src="image/material/question.png"></span>
@@ -501,77 +499,107 @@
       </main>
 
       <section id="setting">
-        <div class="mt-5 justify-content-center">
-          <div class="row m-2 form-item">
-            <p class="col-8 form-label m-0">レジェンド画像モード</p>
-            <div class="col-4">
-              <div class="row">
-                <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_1" value="mode1" autocomplete="off" checked>
-                <label class="col input-radio-label" for="legend_img_mode_1">モード1</label>
-                <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_2" value="mode2" autocomplete="off">
-                <label class="col input-radio-label" for="legend_img_mode_2">モード2</label>
+        <div class="container">
+          <div class="mt-5 justify-content-center">
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">レジェンド画像モード</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_1" value="mode1" autocomplete="off" checked>
+                  <label class="col input-radio-label" for="legend_img_mode_1">モード1</label>
+                  <input type="radio" class="btn-check" name="legend_img_mode" id="legend_img_mode_2" value="mode2" autocomplete="off">
+                  <label class="col input-radio-label" for="legend_img_mode_2">モード2</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row m-2 form-item">
-            <p class="col-8 form-label m-0">Free Weapon 排出率上昇機能</p>
-            <div class="col-4">
-              <div class="row">
-                <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_ON" value="ON" autocomplete="off" checked>
-                <label class="col input-radio-label" for="free_weapon_Flg_ON">ON</label>
-                <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_OFF" value="OFF" autocomplete="off">
-                <label class="col input-radio-label" for="free_weapon_Flg_OFF">OFF</label>
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">Free Weapon 排出率上昇機能</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_ON" value="ON" autocomplete="off" checked>
+                  <label class="col input-radio-label" for="free_weapon_Flg_ON">ON</label>
+                  <input type="radio" class="btn-check" name="free_weapon_Flg" id="free_weapon_Flg_OFF" value="OFF" autocomplete="off">
+                  <label class="col input-radio-label" for="free_weapon_Flg_OFF">OFF</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row m-2 form-item">
-            <p class="col-8 form-label m-0">武器1 種類選択</p>
-            <div class="col-4">
-              <div class="row">
-                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_weapon" value="NORMAL" autocomplete="off" checked>
-                <label class="col input-radio-label" for="weapon1_kinds_weapon">武器</label>
-                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_ammo" value="AMMO" autocomplete="off">
-                <label class="col input-radio-label" for="weapon1_kinds_ammo">弾種</label>
-                <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_free" value="FREE" autocomplete="off">
-                <label class="col input-radio-label" for="weapon1_kinds_free">FREE</label>
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">Free Weapon 排出率調整</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="range" id="free_weapon_range" name="free_weapon_range" min="0" max="100" step="0.1" class="col-9" />
+              		<input type="text" name="free_weapon_output" id="free_weapon_output" class="col" value="50">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row m-2 form-item">
-            <p class="col-8 form-label m-0">武器2 種類選択</p>
-            <div class="col-4">
-              <div class="row">
-                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_weapon" value="NORMAL" autocomplete="off" checked>
-                <label class="col input-radio-label" for="weapon2_kinds_weapon">武器</label>
-                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_ammo" value="AMMO" autocomplete="off">
-                <label class="col input-radio-label" for="weapon2_kinds_ammo">弾種</label>
-                <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_free" value="FREE" autocomplete="off">
-                <label class="col input-radio-label" for="weapon2_kinds_free">FREE</label>
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">武器1 種類選択</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_weapon" value="NORMAL" autocomplete="off" checked>
+                  <label class="col input-radio-label" for="weapon1_kinds_weapon">武器</label>
+                  <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_ammo" value="AMMO" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon1_kinds_ammo">弾種</label>
+                  <input type="radio" class="btn-check" name="weapon1_kinds" id="weapon1_kinds_free" value="FREE" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon1_kinds_free">FREE</label>
+                </div>
               </div>
             </div>
-          </div>
-        </div><!-- mt-5 justify-content-center -->
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">武器2 種類選択</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_weapon" value="NORMAL" autocomplete="off" checked>
+                  <label class="col input-radio-label" for="weapon2_kinds_weapon">武器</label>
+                  <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_ammo" value="AMMO" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon2_kinds_ammo">弾種</label>
+                  <input type="radio" class="btn-check" name="weapon2_kinds" id="weapon2_kinds_free" value="FREE" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon2_kinds_free">FREE</label>
+                </div>
+              </div>
+            </div>
+            <div class="row m-2 form-item">
+              <p class="col-8 form-label m-0">武器3 種類選択</p>
+              <div class="col-4">
+                <div class="row">
+                  <input type="radio" class="btn-check" name="weapon3_kinds" id="weapon3_kinds_weapon" value="NORMAL" autocomplete="off" checked>
+                  <label class="col input-radio-label" for="weapon3_kinds_weapon">武器</label>
+                  <input type="radio" class="btn-check" name="weapon3_kinds" id="weapon3_kinds_ammo" value="AMMO" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon3_kinds_ammo">弾種</label>
+                  <input type="radio" class="btn-check" name="weapon3_kinds" id="weapon3_kinds_free" value="FREE" autocomplete="off">
+                  <label class="col input-radio-label" for="weapon3_kinds_free">FREE</label>
+                </div>
+              </div>
+            </div>
+          </div><!-- mt-5 justify-content-center -->
+        </div>
 
-        <label for="setting_button" id="setting_close_wrapper" class="align-self-start">
+        <label for="setting_close" id="setting_close_wrapper" class="align-self-start">
           <button type="button" name="button" id="setting_close" onclick="hideSetting()"><span>ESC</span>戻る</button>
         </label>
       </section>
 
       <footer class="mt-auto text-white-50">
         <div class="row justify-content-between">
-          <label id="iikanjiFlg_wrapper" class="col-2 mb-2 align-self-start" for="iikanjiFlg">
+          <label id="iikanjiFlg_wrapper" class="footer_left_contents col-2 mb-2 align-self-start" for="iikanjiFlg">
             <input class="" type="checkbox" id="iikanjiFlg" checked="">
             <span class="form-check-label" for="iikanjiFlg">武器の排出率調整</span>
           </label>
-          <div class="w-100"></div>
-          <label id="start_button_wrapper" class="col-2 align-self-start" for="start_button">
+        </div>
+
+        <div class="row justify-content-between">
+          <label id="start_button_wrapper" class="footer_left_contents col-2 col-auto me-auto" for="start_button">
             <input type="button" id="start_button" value="Start" class="btn btn-primary" onclick="onClickStart(false)">
             <span class="" for="start_button"></span>
           </label>
-          <label for="setting_button" id="setting_button_wrarpper" class="align-self-end">
+          <label for="reset_button" id="reset_button_wrarpper" class="footer_icon_btn align-self-end">
+            <button type="button" name="button" id="reset_button"><img src="image/material/reset.svg" width="40px"> </button>
+          </label>
+          <label for="setting_button" id="setting_button_wrarpper" class="footer_icon_btn align-self-end">
             <button type="button" name="button" id="setting_button" onclick="showSetting()"><img src="image/material/gear.png" width="40px"> </button>
           </label>
         </div>
+
       </footer>
     </div>
 
@@ -612,9 +640,19 @@
           if(count === 0){status = false;} else {status = "checked";}
           $(selecter).find(".legends-group-item-all input").prop('checked', status);
         });
+
+        $("#free_weapon_range").on('input', function(e){
+          $("#free_weapon_output").val($(this).val());
+        });
+
+        $("#free_weapon_output").on('change', function(e){
+          $("#free_weapon_range").val($(this).val());
+        });
+
+
+
       });
 
     </script>
-
   </body>
 </html>
